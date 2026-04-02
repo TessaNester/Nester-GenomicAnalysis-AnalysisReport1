@@ -1,0 +1,16 @@
+0: finish making a local Git using the ssh keygen
+- configured my GitHub reposistory on my account by going to settings the 
+  then create new ssh
+- after making the ssh keygen I was able to make a repository on GitHub using the create repository button and I named it GenomicsCourse
+- I used the instructions from GitHub to create the repository on my local git using the section '...or create a new repository on the command line'
+- link the local repository to the online github account using the git add command
+
+1: using the mkdir command I made a directory labeled project/ mkdir project/ 
+- I then used cd to change into that directory cd project/
+- Within that folder I used the mkdir command to make directories named data/, analysis/, and scripts/
+- Within data/ I used mkdir to make the directories raw/ and processed/
+- within analysis/ i used mk to make fastqc/ and bamqc/
+- within each empty directory I made a place holder file 
+- files are file1.txt through file5.txt
+
+
