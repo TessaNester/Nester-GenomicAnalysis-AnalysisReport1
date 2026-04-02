@@ -13,4 +13,11 @@
 - within each empty directory I made a place holder file 
 - files are file1.txt through file5.txt
 
+2: Initalize
+- after trial and error I ended up having to use a token key to connect my local git to my github and then I was able to push. 
+- Now my local git shows up on my github 
 
+3 and 4. 
+- commit work using the git push -u origin main command
+
+Finally I will upload a link of the github repo to canvas for assignment submission
