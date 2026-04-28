@@ -1,0 +1,48 @@
+## Assignment details
+    ## 1. Create a fastqc report for each of the fastq files
+        ## 1.a download reports to local machine and analyze. Make note of any problems identified in each file and how to deal with them
+    ## 2. Based on analysis perform appropriate qc steps to imporve fastq files
+        ## 2.a Use fastQC to check QC. Discuss how commands changed the files and if any additional steps are needed
+    ## 3. Repeat process of step 2 until quaility of file is ready for next stage. 
+
+## Assignment answers
+    ## Before getting started we have to copy all homework files into our own HW3 directory
+
+cp *.fastq.gz ../../tn0442/HW3
+
+    ## also before running any fastqc we had to load the conda enviornment 
+
+conda activate /data/Reynolds/GenomicAnalysisCourse/conda_envs/course_env
+
+    ## 1. After loading the conda enviornment we can then run the fastqc report 
+
+fastqc 22018FL-04-01-12_S12_L002_R1_001.fastq.gz
+
+        ## I ran it on one file first to make sure I was doing the right thing but the next time I do this I will run the command on all files and speed up the process by increasing the number of treads I am using
+
+fastqc *.fastq.gz --threads=4
+
+        ## 2. I used the command above to process multiple files at the same time. I found that deticating 4 threads to the line, I can process 4 files at a time. they run at the same speed as the prevous file however there are 4 running at the same time. 
+        ## after reviewing the slides I realized I forgot to make a slurm so I will do that when processing the files. No wonder it is taking so long... whoops
+    ## 3. Now after looking at the qc data we can trim the adaptors using the fast p command in a slrum. I used the following for my slurm script. 
+fastp \
+    -i 22018FL-04-01-12_S12_L002_R1_001.fastq.gz \
+    -I 22018FL-04-01-12_S12_L002_R2_001.fastq.gz \
+    -o L002_R1_001.trimmed.fastq.gz \
+    -O L002_R2_001.trimmed.fastq.gz \
+    --qualified_quality_phred 30 \
+    --unqualified_percent_limit 0 \
+    --detect_adapter_for_pe \ 
+    --thread 8
+
+    ## 3.a this was an example slurm for the first file we were given. I will trim the remaining files using the folling slurm intstructions
+fastp \
+    -i *R1_001.fastq.gz \
+    -I *R2_001.fastq.gz \
+    -o L002_R1_001.trimmed.fastq.gz \
+    -O L002_R2_001.trimmed.fastq.gz \
+    --qualified_quality_phred 30 \
+    --unqualified_percent_limit 0 \
+    --detect_adapter_for_pe \ 
+    --thread 8
+
